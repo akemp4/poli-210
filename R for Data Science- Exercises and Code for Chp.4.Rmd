@@ -1,0 +1,97 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## Including Code
+
+You can include R code in the document as follows:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+R version 4.3.1 (2023-06-16 ucrt) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Workspace loaded from ~/R for Data Science Book/R for Data Science Chp4/.RData]
+
+> knitr::opts_chunk$set(echo = TRUE)
+> plot(pressure)
+> install.packages("tidyverse")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/edwar/AppData/Local/R/win-library/4.3’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.3/tidyverse_2.0.0.zip'
+Content type 'application/zip' length 430806 bytes (420 KB)
+downloaded 420 KB
+
+package ‘tidyverse’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\edwar\AppData\Local\Temp\RtmpeumoA6\downloaded_packages
+> 
+
+4.4 Exercises
+
+#1
+#The second code does not work because it is not spelled correctly. The "i" is different in the second run of code.
+my_variable <- 10
+my_varıable
+
+#2
+library(tidyverse)
+ggplot(dota = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))
+#corrected code, dota was misspelled and should've been the word data within the parantheses.
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+fliter(mpg, cyl = 8)
+#corrected code, the syntax specifically needed were two equal signs and filter was misspelled. 
+filter(mpg, cyl == 8)
+
+filter(diamond, carat > 3)
+
+diamonds #this is a data set.
+
+#corrected code, diamonds variable was misspelled 
+filter(diamonds, carat > 3)
+
+#3 
+# Alt+Shift+K brings up a quick reference short-key guide
