@@ -34,20 +34,21 @@ ifelse(applications_white$race=="white",1,0)
 applications$race <- ifelse(applications$race=="white",1,0)
 applications_white$race <- ifelse(applications_white$race=="white",1,0)
 
-mean(applications_white$call[applications_white$criminal==1])
-#Answer is .1666 meaning that 16.7% of white applicants that had a criminal record received a call back from the employer.
+mean(applications_white$criminal[applications_white$call==1])
+#Answer is .3289 meaning that 32.9% of white applicants that had a criminal record received a call back from the employer.
 
+#32.9
 
 #3
-mean(applications_white$call[applications_white$criminal==0])
-#Answer is .34 meaning that white applicants that did not have a criminal record received a call back from the employer.
+mean(applications_white$criminal[applications_white$call==0])
+#Answer is .5580 meaning that white applicants that did not have a criminal record received 55.8% of the call backs from the employer.
 
 
 
 #4
-#Among white applicants within the data set, the causal effect of having a criminal record negatively effects the call back chance of an applicant by 17.3 percentage points overall therefore applicants that do not have a background of criminal behavior are more likely to receive a callback.
+#Among white applicants within the data set, the causal effect of having a criminal record negatively effects the call back chance of an applicant by 22.9% percentage points overall therefore applicants that do not have a background of criminal behavior are more likely to receive a callback.
 #These results are plausibly valid on the assumption that the treatment and control groups are comparable to all other variables as they are from a randomized experiment. 
-mean(applications_white$call[applications_white$criminal==1])-
-  mean(applications_white$call[applications_white$criminal==0])
+mean(applications_white$criminal[applications_white$call==1])-
+  mean(applications_white$criminal[applications_white$call==0])
 
 
