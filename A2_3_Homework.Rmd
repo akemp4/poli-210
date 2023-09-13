@@ -1,0 +1,53 @@
+---
+title: "A2_3_Homework"
+author: Anthony Kemp
+date: 9/13/2023
+output: github_document
+---
+
+getwd()
+install.packages("kableExtra")
+install.packages("devtools")
+install.packages("tidyverse")
+library(tidyverse)
+library(devtools)
+library(kableExtra)
+
+library(readr)
+applications <- read_csv("~/GitHub/poli210-course-materials/Homeworks/A2/applications.csv")
+View(applications)
+
+applications_white <- applications[applications$race=="white",]
+
+
+#1
+#Since it is a randomized data set we can do a difference of means test where our estimator will be the percentage points of callbacks to the average of applicants that have or do not have a criminal background.
+
+
+
+#2
+mean(applications_white$criminal)
+mean(applications_white$call)
+ifelse(applications$race=="white",1,0)
+ifelse(applications_white$race=="white",1,0)
+
+applications$race <- ifelse(applications$race=="white",1,0)
+applications_white$race <- ifelse(applications_white$race=="white",1,0)
+
+mean(applications_white$call[applications_white$criminal==1])
+#Answer is .1666 meaning that 16.7% of white applicants that had a criminal record received a call back from the employer.
+
+
+#3
+mean(applications_white$call[applications_white$criminal==0])
+#Answer is .34 meaning that white applicants that did not have a criminal record received a call back from the employer.
+
+
+
+#4
+#Among white applicants within the data set, the causal effect of having a criminal record negatively effects the call back chance of an applicant by 17.3 percentage points overall therefore applicants that do not have a background of criminal behavior are more likely to receive a callback.
+#These results are plausibly valid on the assumption that the treatment and control groups are comparable to all other variables as they are from a randomized experiment. 
+mean(applications_white$call[applications_white$criminal==1])-
+  mean(applications_white$call[applications_white$criminal==0])
+
+

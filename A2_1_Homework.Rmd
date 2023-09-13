@@ -1,0 +1,42 @@
+---
+title: "A2_1_Homework"
+output: github_document
+author: Anthony Kemp 
+date: 9/9/2023
+
+---
+getwd()
+install.packages("kableExtra")
+install.packages("devtools")
+install.packages("tidyverse")
+library(tidyverse)
+library(devtools)
+library(kableExtra)
+#1
+library(readr)
+applications <- read_csv("~/GitHub/poli210-course-materials/Homeworks/A2/applications.csv")
+View(applications)
+
+read(applications.csv)
+#2
+head(applications)
+
+#3
+#Each observation within the excel sheet is a single person represented.
+
+#4
+list.files()
+head(applications)
+summary(applications)
+#The first observation of the data set is job_id(1 is representing one job in which the candidate applied to), 
+#criminal (0 standing as a binary variable indicating not a criminal), race (categorical and is described as white indicating the race), and call (1 is a binary variable and received a callback)
+
+
+#5
+head(applications)
+#job_id is a continuous variable, criminal is binary 1 meaning yes 0 meaning no, race is categorical and is not numeric, call is binary 1 meaning the applicant received callback and 0 the applicant not receiving a callback.
+
+#6 
+#dim() represents a retrieval of total object.
+dim(applications)
+# 696 total observations found within the data set. 

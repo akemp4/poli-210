@@ -1,0 +1,43 @@
+---
+title: "A2_2_Homework"
+output: github_document
+author: Anthony Kemp 
+date: 9/9/2023
+---
+getwd()
+install.packages("kableExtra")
+install.packages("devtools")
+install.packages("tidyverse")
+library(tidyverse)
+library(devtools)
+library(kableExtra)
+
+library(readr)
+applications <- read_csv("~/GitHub/poli210-course-materials/Homeworks/A2/applications.csv")
+View(applications)
+
+head(applications)
+
+#create a new dataframe containing only the job applications for white applicants
+
+applications_white <- applications[applications$race=="white",]
+
+#1
+dim(applications_white)
+# 300 applicants were white within the race category of the study.
+
+#2
+mean(applications_white$criminal)
+#The mean of the dataframe is 0.5, this is meaning that 50% of the white applicants had a criminal background.
+
+#3
+mean(applications_white$call)
+#The mean of the dataframe of callbacks for white applicants were 25%.
+
+#4
+#The treatment variable (x = call) 
+
+#The outcome variable (y = criminal)
+
+#5
+# The treatment group would be those in the variable 'call' that had a 1 and the control group would be anyone that had a 1 in the 'criminal' variable but got a 0 in the 'call' variable.
