@@ -1,0 +1,103 @@
+---
+title: "B1_Indiscriminate_Violence_Data"
+author: Anthony Edward Monreal Kemp
+date: 9/20/2023
+output: github_document
+---
+
+```{r}
+install_github("kosukeimai/qss-package", build_vignettes = TRUE)
+
+library(devtools)
+library(tidyverse)
+library(readr)
+library(qss)
+
+setwd("C:/Users/edwar/OneDrive/Desktop/Poli-210/Chechnya data set/")
+
+
+chechen <- read_csv("chechen.csv")
+View(chechen)
+#1
+# 159 villages were attacked and 159 villages were not attacked.
+dim(chechen)
+chechen %>%
+  count(fire)
+
+
+#2
+#Used example of code from lecture 3 notes.
+#The number of deaths are greater inside Groznny (this is also the capital which makes sense more combat deaths would occur here).
+chechen %>%
+  group_by(groznyy) %>%
+  filter(fire == 1) %>%
+  summarise(mean_of_death = mean(deaths, na.rm = TRUE)) %>%
+  mutate_if(is.numeric, ~round(., 3))
+
+
+#3
+#Though the results show that the majority of observations of villages hit after Russian artillery are in the 3rd quantile (higher than the median of observations), this still does not necessarily mean a strong correlation between the Russian military striking villages and lowered rates.
+
+chechen %>%
+  group_by(fire)%>%
+  summarise(mean_of_postattack = mean(postattack,na.rm = TRUE), 
+  postattack_q1 = quantile(x = postattack, probs = 0.25, na.rm = T),
+  postattack_q2 = quantile(x = postattack, probs = 0.50, na.rm = T),
+  postattack_q3 = quantile(x = postattack, probs = 0.75, na.rm = T),
+  postattack_q4 = quantile(x = postattack, probs = 0.100, na.rm = T))
+#used the quantile example from the lecture notes
+
+
+
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## Including Code
+
+You can include R code in the document as follows:
+
+```{r}
+#4
+#There is not much of a difference, the results are showing a small effect at -.04 (rounded from -.037).
+
+mean(chechen$preattack[chechen$fire==1])
+mean(chechen$preattack[chechen$fire==0])
+
+avg_attack <-mean(chechen$preattack[chechen$fire==1])
+avg_no_attack <-mean(chechen$preattack[chechen$fire==0])
+
+avg_attack-avg_no_attack
+
+
+
+
+#5
+#If the diffattack variable is positive it is then indicating attacks had increased after prior Russian military shelling. 0 means no difference after attacks, 1 means there was another attack.
+
+chechen = chechen %>%
+  mutate(diffattack = chechen$postattack-chechen$preattack)
+head(chechen)
+
+
+
+
+#6.
+#The analysis gives evidence of the claim that indiscriminate violence can lead to reducing insurgent attacks. 
+#The difference of means with the new variable points towards aiming validity of the previous analysis as the effect increased 48 points in measurement.
+#The additional factor that this variable brings is an analysis between a control and treatment group of villages showing a before and after effect of Russian artillery strikes on insurgent behavior.
+
+shelled <- mean(chechen$diffattack[chechen$fire==1])
+not_shelled <- mean(chechen$diffattack[chechen$fire==0])
+
+shelled - not_shelled
+
+```
+
+
+
+```{r}
+```
+

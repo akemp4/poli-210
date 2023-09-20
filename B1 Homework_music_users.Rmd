@@ -1,0 +1,192 @@
+---
+title: ":B1 Homework_music_users"
+author: Anthony Edward Monreal Kemp
+date: 9/20/2023
+output: github_document
+---
+
+```{r}
+
+
+install.packages(c("tidyverse", "devtools","kablextra","ineq","arsenal"), dependencies = TRUE)
+install.packages("Hmisc")
+library(devtools)
+library(haven)
+library(readr)
+library(ineq)
+library(tidyverse)
+library(arsenal)
+library(Hmisc)
+
+setwd("C:/Users/edwar/OneDrive/Desktop/Poli-210/songs and user")
+
+songs1 <- read_csv("songs1.csv")
+View(songs1)
+
+songs2 <- read_csv("songs2.csv")
+View(songs2)
+
+users1 <- read_csv("users1.csv")
+View(users1)
+
+users2 <- read_csv("users2.csv")
+View(users2)
+
+
+
+
+#1.
+
+# Each song played because of social influence (1)is totaled at 702 and the song played (9) independently from social influence is 1441.
+# (1) representing social condition is showing a proportion estimate of 32.8%, users in the (9) independent condition  is showing a proportion estimate of 67.2%
+
+expir1_users <- users1$world_id
+table(expir1_users)
+
+table(expir1_users)/length(expir1_users)
+
+# Each song played because of social influence (1) is totaled at 689 abd the song played (9) independently from social influence is 1446.
+# (1) representing social condition is showing a proportion estimate of 32.2%, users in the (9) independent condition  is showing a proportion estimate of 67.7%
+
+expir2_users <- users2$world_id
+table(expir2_users)
+
+table(expir2_users)/length(expir2_users)
+
+
+#From both of the experiments we can conclude that there are more users in experiment two within the (9) independent condition. Though a difference is seen, it is not necessarily significant.
+
+
+
+
+
+#2
+
+#The mean of social influenced songs for experiment 1 played is 13.7 (rounded)
+expir1_songs1_social <- mean(songs1$down_soc)
+expir1_songs1_social
+
+#The mean of the songs being played independently for experiment is 32.9 (rounded)
+expir1_songs1_indep <- mean(songs1$down_indep)
+expir1_songs1_indep
+
+
+
+#The mean of social influenced songs for experiment 2 is 21.3 (rounded)
+expir2_songs2_social <- mean(songs2$down_soc)
+expir2_songs2_social
+
+#The mean of song being played independently for experiment 2 is 45.7
+expir2_songs2_indep <- mean(songs2$down_indep)
+expir2_songs2_indep
+
+#While both experiments display that social influence of songs is consistently lower there is a keen difference in how the proportions of the experiments are affecting numerical results.
+
+
+
+#3
+#Support of the hypothesis is shown as the coefficient for social based downloads (.33) are higher than independent downloads (.24).
+songs1_download_social <- ineq(songs1$down_soc)
+songs1_download_social
+
+songs1_download_indep <- ineq(songs1$listen_indep)
+songs1_download_indep
+
+
+#The hypothesis is still supported in the second experiment, coefficient values for social based downloads (.45) are higher than independent downloads (.18).
+
+songs2_download_social <- ineq(songs2$down_soc)
+songs2_download_social
+
+songs2_download_indep <- ineq(songs2$down_indep)
+songs2_download_indep
+
+
+
+
+#Code for songs listened to.
+
+#Hypothesis is still supported in experiment 1 as the socially listened songs (.16) is higher than independently listened to songs (.12).
+songs1_listened_socially <- ineq(songs1$listen_soc)
+songs1_listened_socially
+
+
+songs1_listened_indep <- ineq(songs1$listen_indep)
+songs1_listened_indep
+
+
+#Hypothesis is still supported in experiment 2 as the socially listened songs (.42) is higher than independently listened to songs (.08).
+
+songs2_listened_socially <- ineq(songs2$listen_soc)
+songs2_listened_socially
+
+#
+
+songs2_listened_indep <- ineq(songs2$listen_indep)
+songs2_listened_indep
+
+
+
+
+#4
+
+#Could not figure out the code for this question.
+
+
+#5
+
+#Yes this study has internal validity as within the study as each case from question 3 showing that socially conditioned music is more likely to be downloaded over independent conditions.
+#However, it must be noted that there is a sample difference and it would be better overall for the results from each dataframe to have matching observations.
+
+
+#Experiment 1
+ineq_expir1_download_socially_songsV1 <- ineq(songs1$down_soc)
+
+ineq_expir1_download_indep_songsv1 <- ineq(songs1$down_indep)
+
+
+#Experiment 2
+
+ineq_expir2_download_socially_songsV2 <- ineq(songs2$down_soc)
+
+ineq_expir2_download_indep_songsv2 <- ineq(songs2$down_indep)
+
+#Calculating download effects 
+
+expir1_overall_effect <- ineq_expir1_download_socially_songsV1 - ineq_expir1_download_indep_songsv1
+expir2_overall_effect <- ineq_expir2_download_socially_songsV2 - ineq_expir2_download_indep_songsv2
+
+
+expir1_overall_effect - expir2_overall_effect
+
+#Calculating listen effects
+
+#Experiment 1
+
+expir1_listen_socially_overall_effect <- ineq(songs1$listen_soc)
+expir1_listen_indep_overall_effect <- ineq(songs1$listen_indep)
+
+#Experiment 2
+
+expir2_listen_socially_overall_effect <- ineq(songs2$listen_soc)
+expir2_listen_indep_overall_effect <- ineq(songs2$listen_indep)
+#
+expir1_listen_overall_effect_ <- expir1_listen_socially_overall_effect -  expir1_listen_indep_overall_effect
+
+expir2_listen_overall_effect_ <- expir2_listen_socially_overall_effect - expir2_listen_indep_overall_effect
+
+
+expir1_listen_overall_effect_ - expir2_listen_overall_effect_
+
+```
+
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
