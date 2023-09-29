@@ -1,0 +1,131 @@
+---
+title: "A3 Homework"
+author: Anthony Edward Monreal Kemp
+date: September 25, 2023
+output: github_document
+---
+
+```{r}
+
+library(tidyverse)
+
+setwd("C:/Users/edwar/OneDrive/Desktop/DSS")
+
+library(readr)
+ANES <- read_csv("ANES.csv")
+View(ANES)
+
+head(ANES)
+
+```
+
+
+1. Adding in the VEP_turnout variable within the dataset.
+```{r}
+ANES$VEP_turnout <- ANES$votes/ANES$VEP * 100
+```
+2. Checking the addition of the new variable. The unit of measurement is percent due to being multiplied by 100.
+```{r}
+head(ANES)
+
+```
+3. Creation of the VAP_turnout variable. 
+  number of ballots officially casted divided by the voting age populaiton multiplied by 100
+  votes/VAP*100
+
+```{r}
+ANES$VAP_turnout <- ANES$votes/ANES$VAP * 100
+
+
+```
+4. I would not necessairly expect VAP turnout to be lower than VEP turnout however these percentages makes sense when taking in accounts of variables such as criminal records and how it can effect the overall outcome of the percentage of the the VAP and VEP turnout variables.
+
+```{r}
+head(ANES)
+
+
+```
+5. The amount of eligible people will always be higher than that of the average age, because VAP is an 'average', and VEP is a 'total' 
+
+6. The mean of the average turnout tells us that 48% of the population eligible to vote will actually vote in elections.
+```{r}
+mean(ANES$VEP_turnout)
+```
+
+7. 65% (rounded) of eligible voters have stated that they have voted on the ANES questionnaire.
+```{r}
+mean(ANES$ANES_turnout)
+```
+8. The mean of ANES_turnout and VEP_turnout is telling us that there is roughly a 20% difference in those that are actully voting compared to those stating that they are. Meaning people are being dishonest when responding to ANES if they had actually voted or not
+
+```{r}
+mean(ANES$VEP_turnout) - mean(ANES$ANES_turnout)
+```
+
+Part 3
+
+1.
+
+```{r}
+ANES$turnout_bias <- ANES$ANES_turnout-ANES$VEP_turnout
+
+```
+
+2.
+```{r}
+head(ANES)
+```
+The unit of measurement for turn out bias is an approximated whole number.
+
+3.
+
+```{r}
+hist(ANES$turnout_bias)
+
+```
+This variable does look evenly distributed throughout the data set as the histogram looks similar to a distribution bell curve.
+
+4. 
+a. 
+73% of ANES respondents stated that they voted in a presidential election.
+
+55% of eligible voting population voted within a presidential election.
+
+18% of ANES respondents were biased in their presidential responses.
+
+```{r}
+mean(ANES$ANES_turnout[ANES$presidential == 1])
+mean(ANES$VEP_turnout[ANES$presidential == 1])
+mean(ANES$turnout_bias[ANES$presidential == 1])
+
+```
+
+
+
+
+
+
+b.
+55% of ANES respondents stated that they had voted within a Midterm election.
+
+35% of eligible voting population actually voted in the Midterm elections.
+
+15% Of of ANES respondents were biased in their response to midterm election turnout.
+```{r}
+mean(ANES$ANES_turnout[ANES$midterm == 1])
+mean(ANES$VEP_turnout[ANES$midterm == 1])
+mean(ANES$turnout_bias[ANES$midterm == 1])
+```
+
+c. ANES respondents are more likely to vote in presidential elections rather than midterm elections.
+
+
+
+
+
+
+
+
+
+
+
