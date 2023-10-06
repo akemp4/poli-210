@@ -1,0 +1,195 @@
+---
+title: "B2 Homework"
+author: Anthony Edward Monreal Kemp
+date: September 30, 2023
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+setwd("C:/Users/edwar/OneDrive/Documents/GitHub/poli210-course-materials/Homeworks/B2")
+```
+
+```{r}
+CCAP <- read_csv("CCAP.csv")
+View(CCAP)
+head(CCAP, n=4)
+```
+
+```{r}
+gay <- read_csv("gay.csv")
+View(gay)
+head(gay, n=4)
+```
+
+```{r}
+grades <- read_csv("grades.csv")
+View(grades)
+```
+
+```{r}
+dim(gay)
+```
+```{r}
+dim(CCAP)
+```
+
+1. The distributions look similar on the X-axis, however the frequency, is doubled in the first histogram compared to the second histogram. This could cause a problem 
+since this is counting a number of times an event had occurred.
+```{r}
+
+hist(CCAP$feel)
+
+```
+
+```{r}
+hist(gay$feel1)
+
+```
+```{r}
+hist(CCAP$feel, breaks = 10,
+     main = "Voter's Feeling Towards Gay Men/Women")
+
+
+```
+
+```{r}
+hist(gay$feel1, breaks = 10,
+     main = "Feelings Towards Gay Men/Women Before Canvassers Field") 
+```
+
+
+
+2.
+
+```{r}
+summary(CCAP$feel)
+```
+
+```{r}
+sd(CCAP$feel)
+```
+
+```{r}
+summary(gay$feel1)
+```
+```{r}
+sd(gay$feel1)
+```
+Yes, the two distributions have similar descriptive statistics.
+
+
+3.Yes, because a sample of nation US voters should follow the same descriptive statistics since central limit theorem states that large samples from a population will be normally distributed.
+
+
+4.
+a.
+
+```{r}
+control_group <- gay[gay$treatment=="No Contact",]
+```
+```{r}
+ggplot(data = control_group) +
+      geom_point(mapping = aes(x = feel1, y= feel2))
+
+```
+b.
+```{r}
+ggplot(data = control_group) +
+      geom_point(mapping = aes(x = feel1, y= feel3))
+```
+c.
+```{r}
+ggplot(data = control_group) +
+      geom_point(mapping = aes(x = feel1, y= feel4))
+```
+
+Yes it looks like the respondents in the gay marriage experiment have relatively stable feelings overtime.
+
+
+5.
+```{r}
+cor(gay$feel1, gay$feel2, use = "complete.obs")
+
+```
+
+```{r}
+cor(control_group$feel1, control_group$feel3, use = "complete.obs")
+```
+```{r}
+cor(control_group$feel1, control_group$feel4, use = "complete.obs")
+```
+
+6. Yes I think the data is fabricated.
+
+
+
+Predicting Course Grades Using Midterm Scores
+
+```{r}
+grades<-read.csv("grades.csv")
+view(grades)
+
+head(grades)
+
+```
+1. 
+a. Each observation is representing a student and their scores on their midterm, final, and overall class grade. gradeA variable is a yes or no binary variable if the student received an A in that class. 
+
+b. X variables are the midterm and final variables
+c. y variable is the final grade of the class
+
+d. 
+```{r}
+cor(grades$midterm, grades$final, use = "complete.obs")
+
+```
+Yes it is looks like the relationship is strongly linear.
+
+
+2.
+a. & c.
+```{r}
+plot(x=grades$midterm, y=grades$final)
+fit<-lm(final~midterm, data = grades)
+abline(fit)
+```
+```{r}
+lm(final~midterm, data = grades)
+```
+b. final= -6.0059+0.9704*midterm
+Y is 'overall' class grade variable
+X is 'midterm' meaning each students midterm score
+alpha: value of Y if X is zero
+beta: increase in Y associated with one unit increase in X
+
+3. 
+```{r}
+#a
+-6.0059+0.9704*80
+
+#b 
+-6.0059+0.9704*90
+
+#c
+0.9704*10
+
+
+
+```
+4. 
+```{r}
+cor(x= grades$midterm, y=grades$final)^2
+```
+
+I would interpret that this as the variables being displayed are showing 51% of the data is being explained by the independent variable being held with the dependent variable.
+
+
+
+
+
+
+
+
+
