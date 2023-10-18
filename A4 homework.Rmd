@@ -1,0 +1,132 @@
+---
+title: "A4"
+author: Anthony Edward Monreal Kemp
+date: 10/18/2023
+output: github_document
+---
+
+1.
+
+A. Objective
+B. Subjective
+C. Objective
+D. Subjective
+E. Objective
+
+
+2.
+
+A.Empirical
+B.Classical
+C.Empirical
+
+3.
+
+A. Simple 
+B. Simple
+C. Compound
+D. Simple
+E. Compound
+
+4.
+
+A. Independent 
+B. Mutually exclusive
+C. Independent
+D. Mutually exclusive
+E. Collectively exhaustive
+
+
+5. 
+
+A. True
+B. False
+C. True
+
+6.
+
+It will be from 0-1
+
+
+7. 
+
+Pr (D) is the difference of the sum of Pr(A)+Pr(B)+Pr(C)
+
+```{r}
+A<- 0.23
+D<- 1-(0.23+0.15+0.46)
+D+A
+```
+
+
+8. 
+
+The answer would be zero since they are all mutually exclusive.
+
+9.
+```{r}
+Pr_A <- .13
+Pr_B <- .36
+
+
+0.13*0.36
+```
+
+10. 
+
+0.5=0.3+x-0.3x
+x=2/7
+
+
+11.
+
+0.7=0.4+x-0.4x
+x=1/2
+
+12.
+
+0.6=0.4+x-0.4x
+x=1/3
+
+13.
+
+A. factorial 12/7=
+B. 1/6
+C. 12!/5!*7!=792
+D. 7!/2!*5!=21
+E. 12*11=132
+F. 7*6=42
+
+14.
+
+6c2 * 5c2 * 4c1 = 600
+
+15.
+6!= 720
+
+16.
+
+A. 15c6 = 5005
+B. 10c3 * 5c3 = 120 * 10 = 1200
+C. 10c4 * 5c2 = 210 *10 = 2100
+
+17.
+(1/52)*(3/52)^3 * 4c1 = 36/52^5
+
+18.
+(3/52)^3*(1/52)^2* 5c2
+=90/ 52^5
+
+
+19.
+7: 3/18= 1/6
+3:1/18
+
+20.
+0.8*0.5/0.8:0.5+0.3*0.5+0.1*0.5
+=0.4/0.6
+=2/3
+
+
+
+From 21 to 26 I did not fonish, I fell ill over the weekend.

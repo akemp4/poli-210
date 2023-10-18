@@ -1,0 +1,199 @@
+---
+title: "B3 Homework"
+author: "Anthony Kemp"
+date: "2023-10-17"
+output: html_document
+---
+```{r}
+install.packages("e1071")
+library(tidyverse)
+library(e1071)
+```
+Chp. 1
+
+Problem #22
+6 children in total
+3 boys
+3 girls
+All births are equally likely to happen
+
+I used the factorial combination section from the other book to solve this.
+
+(3!)(3!)/6! = 0.05
+
+Problem #34
+```{r}
+sims <- 100000
+dice <- c(1,2,3,4,5,6)
+
+roll_count <- 0
+fav_outcome <- 0
+
+
+for (i in 1:sims) {
+      roll <- sample(x=dice, size=30, replace=TRUE)
+      for(v in 1:6){
+      a <- sum(roll==v)
+      if(a==5){
+        roll_count <- roll_count + 1
+      }
+      } 
+      if(roll_count==6){
+        fav_outcome <- fav_outcome + 1 
+      }
+      roll_count <-0
+     }
+
+answer <- fav_outcome/sims
+answer
+
+```
+
+Chp. 2
+
+Problem #2
+```{r}
+twin_type <- c("fraternal","fraternal","identical")
+frat_combo <- c("BB","BG","GB","GG")
+ident_combo <- c("BB","GG")
+
+ident_BBcount <- 0
+BB_count <- 0
+
+for (i in 1:sims){
+  twin_typei <- sample(twin_type, 1)
+  if(twin_typei=="fraternal"){
+    sex_combo <- sample(frat_combo, 1)
+  }
+  else{
+    sex_combo <- sample(ident_combo, 1)
+  }
+  if(twin_typei=="identical" & sex_combo == "BB"){
+    ident_BBcount <- ident_BBcount + 1
+  }
+  if(sex_combo == "BB"){
+    BB_count <- BB_count+1
+  }
+}
+
+answer <- ident_BBcount/BB_count
+answer
+
+```
+
+Problem #32
+
+
+For all scenarios the probability is 2/3 = 66,6%.
+
+If A\>B is independent of B\>C and should have the same probability no matter the condition.
+
+The event B\>C is not independent of C\>D and the probability should be lower for B\>C given that C\>D.
+
+
+```{r}
+a <- c(4,4,4,4,0,0)
+b <- c(3,3,3,3,3,3)
+c <- c(6,6,2,2,2,2)
+d <- c(5,5,5,1,1,1)
+
+a_count <- 0
+b_count <- 0
+c_count <- 0
+d_count <- 0
+
+aacount <- 0
+abcount <- 0
+
+for (i in 1:sims){
+  a_roll <- sample(x=a, size=1, replace = TRUE)
+  b_roll <- sample(x=b, size=1, replace = TRUE)
+  c_roll <- sample(x=c, size=1, replace = TRUE)
+  d_roll <- sample(x=d, size=1, replace = TRUE)
+  
+  # PART A
+  if(a_roll>b_roll){
+    a_count <- a_count + 1
+  }
+   if(b_roll>c_roll){
+    b_count <- b_count + 1
+   }
+   if(c_roll>d_roll){
+    c_count <- c_count + 1
+   }
+   if(d_roll>a_roll){
+    d_count <- d_count + 1
+   }
+ 
+   # PART B
+  if(b_roll>c_roll){
+    if(a_roll>b_roll){
+      aacount <- aacount + 1
+      }
+    }
+  if(b_roll>c_roll){
+    if(c_roll>d_roll){
+      abcount <- abcount + 1
+      }
+    }
+}
+
+a_answer <- a_count/sims
+b_answer <- b_count/sims
+c_answer <- c_count/sims
+d_answer <- d_count/sims
+a_answer
+
+
+
+
+b_answer
+c_answer
+d_answer
+
+ba_answer <- a_count/b_count
+ba_answer
+
+bb_answer <- abcount/c_count
+bb_answer
+
+
+
+```
+
+
+Problem #38
+
+```{r}
+sims <- 100000
+doors <- c("goat", "goat", "goat", "goat", "car", "goat", "goat")
+result.switch <- result.noswitch <- rep(NA, sims)
+
+  for (i in 1:sims) {
+  ## randomly choose the initial door
+  initialdoor <- sample(1:7, size = 1)
+  result.noswitch[i] <- doors[initialdoor]
+  remain <- doors[-initialdoor] # remaining six doors after initial door is chosen
+  ## Monty chooses three doors with a goat
+  if (doors[initialdoor] == "car"){ # initial door holds the car
+    monty <- sample(1:6, size=3)
+  } else{ # 5 goats and one car left
+    car_placement <- which(grepl("car", remain))
+    tmp <- c(1,2,3,4,5,6)
+    monty <- sample(tmp[tmp!=car_placement], 3)
+  }
+    remain_stp2 <- remain[-monty] 
+    result.switch[i] <- sample(remain_stp2, 1)
+  }
+
+mean(result.noswitch == "car")
+
+mean(result.switch =="car")
+```
+Seeing the mean comparison, it would be more viable to switch doors for the car.
+
+
+
+
+
+
