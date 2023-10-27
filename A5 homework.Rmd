@@ -1,0 +1,138 @@
+---
+title: A5 Homework
+author: Anthony Edward Monreal Kemp
+date: 10/25/2023
+output: github_document
+---
+10.9 Exercises
+
+
+1. Why do insurgencies thrive for extended periods of time in areas that are fully equipped militaries?
+  Assumptions:
+    Insurgencies thrive abundently.
+    Equipped militaries have to change potentially concrete interstate warfare strategy.
+    Ill-equipped militaries are unable to counter insurgencies effectively in combat.
+  
+  Hypothesis
+  H1: Equipped militaries will conform their operation strategies toward unconventional warfare methods.
+  
+2. Frequency distribution is only used if all observations of a population do not have a unique values on the variable
+  of interest.
+  
+  Relative Frequency distribution looks at given values that lie between 0 and 1. This type of distribution is a transformation of the frequency distribution it can be used as a tool in both abstract theoretical and concrete empirical tool.
+  
+3. PDF is relative to to the frequency distribution of that particular PMF variable; it is looking at how smooth the curve is of the specified PMF. 
+
+4. A PMF is Probability Mass Function and allows us to:
+    -Say inferences about a range of values
+    -Specify the probabilities of drawing discrete values
+    -Is related to the relative frequency distribution
+    -Takes and connects various classical probabilities of specific values for a sample
+    -Identifys differces of probability distributions
+    
+5.  
+
+                      Chechen Rebels      Russian Military
+
+    Firefight               Rural           Rural/Urban
+    Ambush                  Rural/Urban         Urban
+    
+    
+    
+    
+    
+6. Bernoulli distribution could be used to look at European Union regional legislation voting patterns. 
+  Binomial distribution could be used to look at unanimous strategic decisions by the Joint Chiefs of Staff.
+  
+
+7.  
+  In the Binomial Coin experiment with the more n trials that occur with a p of .50 the bell curve is evenly distributed.
+  
+  In the Poisson Experiment as t increases the distribution moves to the right, when it decreases it moves to the left. The variable r increases the density range moves with t across the distribution.
+
+8. Could not answer this question, kept getting a 404 error
+
+9. 3^4/e^3*4! would be the set up but I am not understanding what 'e' would be when put to the third power.
+
+10. I do not know where to start with this problem, but will review the answer key to try and understand how to write it mathematically.
+
+11. I do not know where to start with this problem, but will review the answer key to try and understand how to write it mathematically.
+
+
+11.
+
+
+
+
+Chapter 11 
+
+1. PDF is relative to to the frequency distribution of that particular PMF variable; it is looking at how smooth the curve is of the specified PMF. 
+
+2. A PDF is a description of continuous random variables where a PMF is looking solely on the variable curvature smoothness and it is specifically discrete.
+
+3.A PDF displays a picture of a variable at a certain value within a population. A CDF is primarily fixed on a value that is less than the prescribed value.
+
+
+4. Scatter plot of the correlation between the number of insurgencies in countries throughout the Cold War on a yearly measurement from 1948-1991.
+
+5. We cannot just look at a probability distribution and tell if it is normal because PDF's inherently look different from standard correlation bell curves. 
+
+6. Relative frequency distribution of a sample is showing how often an observation occurs and is not infinite. A PDF describes the likelihood of drawing any specific value with an exact probability within a range.
+
+7. PDF requires calculating an integral since it would be zeroed by a finite set of values.
+
+8.Need further explanation on this problem
+
+
+9. Pr(X>10) therefore 
+= 1-F(10)=1-10/25=0.6
+*I do need an explanation on why this would be the answer.
+
+
+10. The -$100 million is indicating there is an average deficit within the country. This deficit is calculated through a spread of $300 million.
+
+11. An example of a political process that can be drawn from a normal distribution is pre/post votes in British Parliament on legislation; 
+
+log-normal example of political process could be vote payoffs to moderate politicians within the Senate to guarantee legislation pass; 
+
+logistic model can be used during a federal court ruling of an either pass or no pass choice (binary); 
+
+exponential example of a political process is the decision to send military units to a specified area of the world that is at risk of conflict occurring;
+
+Pareto example could be the drawing of borders by the Triple Entente/United States post WW1;
+
+gamma example is the creation of political parties and their survivability overtime with government birth to maturity; 
+
+example of Weibull is the longevity of an insurgent government after high ranking members either defect or are killed in combat.
+
+12. 
+
+Normal distribution: when the mean is at 100 or at -100 the bell shape does not change when the standard deviation is constant at 0.1 or at 10.
+
+Log-Normal distribution: Looks like a staircase going left to right in a descending pattern. The increase in p(shape) increases both the mean and standard deviation and begins to take on the shape of the right side bell of a normal bell shaped curve.
+
+Logistic: Preset of location 'a' and scale 'b' displays a normal bell curve. It looks similar to a normal distribution but the curveture is more bold, the higher the 'b' the more of a right tail tendency, the lower 'b' the more left tail tendency the distribution takes.
+
+Beta: 'a' and 'b' change the shape and location of the distribution and act in recipriocal to each others. If 'a' and 'b' are at 0.5 you will get a parabola that does not touch the X-axis. If either 'a' or 'b' is at 0.5 and the other variable changes you will get either a dominate left or right tale distribution.
+
+Gamma: 'k' increase from 0.1 to 100 will make the distribution go from a left tail tendency to a normal bell shaped distribution when 'b' is at 1.0. The increase in 'b' follows the similar patterns of left tail tendency into a normal distribution. 
+
+Pareto: 'a' increase with 'b' at 1.0 will keep a constant left tail tendency, change in 'b' will still keep a left tail tendency, however change in 'a' will change how smooth/steep the slope of the distribution is. 
+
+Weibull: A change increase in 'k' will change the distribution from a left tail into a normal distribution and will move the distribution toward the right of the X-axis. 'b' will only change the steepness of the curve, when the distribution is left tailed it is visually seen, but when moved into a normal looking bell curve it is no longer visual.
+
+13.
+Normal: After 1000 runs the empirical is matching the theoretical density.
+
+Log-Normal: First runs start getting empircal analysis on the outsides of the distribution curves but then slowly moves into the bell shape. The empirical is much bigger in shape compared to theoretical.
+
+Logistic: Empirical begins on the outside but moves into the theoretical bell shaped distribution, however the Y-axis is much larger in the empirical findings rather than the theoretical.
+
+Beta: Empirical density starts relatively inside the theoretical, the density begins to move out and up but stays relatively within the bounds of the theoretical density. 
+
+Gamma: Empirical density is higher than the theoretical and follows the same shape, but there are some higher distributions on the left empirically where theoretical it is a smooth left curve.
+
+Pareto: Empirically the density almost mirrors that of the theoretical density, which is very insightful on how accurate this distribution is. 
+
+Weibull: Empirical density is shown to be within bounds of theoretical curves, but the height of the empirical curve is higher than the theoretical.
+
