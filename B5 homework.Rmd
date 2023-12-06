@@ -1,0 +1,209 @@
+---
+title: "Homework B5"
+output: github_document
+author: Anthony Edward Monreal Kemp
+date: 12/4/2023
+---
+```{r}
+setwd("C:/Users/edwar/OneDrive/Desktop/DSS")
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+
+
+```{r}
+read.csv("elite.ug_1.csv")
+
+elitecsv <- read.csv("elite.ug_1.csv")
+
+
+View(elitecsv)
+
+```
+
+Your assignment is to replicate, as best you can, each panel of Figure 1 (A, B, and, C) from the article:
+
+LeVeck, B. L., Hughes, D. A., Fowler, J. H., Hafner-Burton, E. & Victor, D. G. The role of self-interest in elite bargaining. Proceedings of the National Academy of Sciences of the United States of America 111, 18536–18541 (2014).
+
+For each panel (A, B, and C), make a graph that is as close as possible to the graph shown in the paper.
+
+After each graph, display the dataset used by the graph.
+
+You can find a copy of the article at:
+http://faculty.ucmerced.edu/bleveck/assets/pdfs/role_of_self_interest_in_elite_bargaining.pdf
+
+You can find a copy of the datasets at:
+https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/27894
+
+The core part of this assignment will be to calculate the standard errors, which are plotted as whiskers on top of the bar graphs (whiskers are 1 standard error of the mean in each direction). You can calculate the standard errors under the assumption that both elite and non-elite subject pools are random samples from their respective populations. To do this create a function called `sem`, which takes a variable and calculates the standard error of the mean, under the assumption that each observation is randomly, independently sampled from a broader population. I've started the code for you below.
+
+Note, some of the standard errors in the actual paper are calculated using an estimation technique called the non-parametic bootstrap. We'll discuss this in a future class, but for now just know that your estimates may differ from the paper's by a little bit. 
+
+
+```{r}
+# takes a numeric vector and returns a standard error of the mean
+sem <- function(x){
+  if(!is.numeric(x)){
+    "Error: x needs to be a numeric variable"
+  }
+  x_complete <- na.omit(x)
+  n <- length(x_complete) # fill this in
+  sd_hat <- sd(x_complete) # estimate standard deviation of the variable using the sd() function, or code your own.
+  sem <- sd_hat/sqrt(n)# calcuate sem
+  return(sem)    
+}
+```
+
+
+
+Figure Replications
+
+```{r}
+sem(elitecsv$ult.min)
+```
+
+Figure 1
+```{r}
+Fig_1 <- elitecsv %>%
+  group_by(elite)%>%
+  summarize(
+    mean_propose = mean(ult.propose, na.rm = TRUE),
+    mean_demand = mean(ult.min, na.rm = TRUE), 
+    mean_patient = mean(patience, na.rm = TRUE),
+    sem_propose = sem(ult.propose),
+    sem_demand = sem(ult.min),
+    sem_patient = sem(patience)
+  )
+```
+Figure 1 C
+
+
+```{r}
+Fig_1_c <- elitecsv %>%
+  group_by(elite, levelk) %>%
+  summarise(
+    n =n()
+  )
+
+Fig_1_c <- Fig_1_c %>%
+  filter(!is.na(levelk))
+
+Fig_1_c_2 <- aggregate(Fig_1_c$n, list(Fig_1_c$elite), FUN=sum)
+Fig_1_c <- mutate(Fig_1_c, share = ifelse(elite==0, n/132*100,n/95*100))
+Fig_1_c <- mutate(Fig_1_c, type= ifelse(elite==0, "Undergraduate","Elite"))
+Fig_1_c
+```
+
+```{r}
+
+head(Fig_1)
+
+View(Fig_1)
+
+
+Fig_1 <- mutate(Fig_1, type= ifelse(elite==0, "undergraduate", "elite"))
+
+view(Fig_1)
+
+ggplot(Fig_1) +
+  geom_bar(aes(x= type, y= mean_propose, fill = type), stat = "identity", alpha=0.7) +
+  geom_errorbar(aes(x=type, ymin=mean_propose-sem_propose, ymax= mean_propose+sem_propose), width=0.4, colour="black", alpha=0.9, linewidth=1.3)
+```
+
+
+Figure 2
+
+
+```{r}
+ggplot(Fig_1) +
+  geom_bar(aes(x= type, y= mean_patient, fill = type), stat = "identity", alpha=0.7) +
+  geom_errorbar(aes(x=type, ymin=mean_patient-sem_patient, ymax= mean_patient+sem_patient), width=0.4, colour="black", alpha=0.9, linewidth=1.3)
+
+
+
+
+
+```
+
+
+
+
+```{r}
+
+
+
+figure_c <- ggplot(Fig_1_c, aes(x=levelk, y=share, fill=type)) + 
+  geom_bar(position= "dodge", stat= "identity", alpha=0.7) 
+  geom_errorbar(aes(x=type, ymin=mean_stratreason-sem_stratreason, ymax=mean_stratreason+sem_stratreason, width=0.4, colour="black", alpha=0.9, linewidth=1.3))
+
+figure_c <- figure_c + labs(x="Level of Strategic Reasoning", y = "% of population")
+
+figure_c
+
+```
+I will note that the error bars do not show, I understand that the error bars are coming from the standard error that is measured within code line 141, however I could not figure out how to find the level of strategic reasoning. I would have do the same code from Figure 1A but extend it in Firgure 1C. I was not able to come up with the code to figure this one out.
+
+
+
+
+
+
+Next, create a test statistic as described in lecture and the notes. Test the null hypothesis that that the difference between elite and undergraduate MA0's is 0. Use an alpha 0.05. 
+
+```{r}
+elitecsv <- elitecsv %>%
+  filter(!is.na(ult.min))
+elitecsv
+mean_elite <- mean(elitecsv$ult.min[elitecsv$elite==1])
+
+mean_undergrad <- mean(elitecsv$ult.min[elitecsv$elite==0])
+mean_undergrad
+D_hat <- mean_elite-mean_undergrad ## insert difference in means estimator
+
+elite_variance <- var(elitecsv$ult.min[elitecsv$ult.min==1])
+elite_n <- sum(with(elitecsv, elite==1))
+
+undergrad_variance <- var(elitecsv$ult.min[elitecsv$elite==0])
+undergrad_n <- sum(with(elitecsv, elite==0))
+
+se_D_hat <- sqrt(elite_variance/elite_n + undergrad_var/undergrad_n) ##  calculate standard error for difference in means estimator using notes / slides
+test_statistic <- (D_hat - 0)/se_D_hat
+test_statistic
+
+alpha <- 0.05
+qnorm(1-alpha/2) # use pnorm to analyze the test statistic under the null hypothesis as shown in the lecture slides
+```
+
+
+```{r}
+elitecsv <- elitecsv %>%
+  filter(!is.na(ult.min))
+elitecsv
+mean_elite <- mean(elitecsv$ult.min[elitecsv$elite==1])
+
+mean_undergrad <- mean(elitecsv$ult.min[elitecsv$elite==0])
+mean_undergrad
+D_hat <- mean_elite-mean_undergrad ## insert difference in means estimator
+
+elite_variance <- var(elitecsv$ult.min[elitecsv$ult.min==1])
+elite_n <- sum(with(elitecsv, elite==1))
+
+undergrad_variance <- var(elitecsv$ult.min[elitecsv$elite==0])
+undergrad_n <- sum(with(elitecsv, elite==0))
+
+se_D_hat <- sqrt(elite_variance/elite_n + undergrad_var/undergrad_n) ##  calculate standard error for difference in means estimator using notes / slides
+test_statistic <- (D_hat - 0)/se_D_hat
+test_statistic
+
+
+alpha <-0
+qnorm(1-alpha/2)
+
+```
+
+The null hypothesis will be rejected since there is no significant distance between elites and undergraduates. 
+  
